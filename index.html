@@ -113,12 +113,12 @@
         
         /* Modal Styles */
         .modal {
-            display: none;
+            display: none; /* Hidden by default */
             opacity: 0;
             transition: opacity 0.3s ease-in-out;
         }
         .modal.show {
-            display: flex;
+            display: flex; /* Use flex for centering */
             opacity: 1;
         }
         .modal-content {
@@ -206,36 +206,11 @@
                 </h2>
                 <div class="space-y-5">
                     <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl overflow-hidden">
-                        <img 
-                            src="assets/aiassistant.png" 
-                            alt="AI Assistant interface" 
-                            class="w-full h-auto object-cover cursor-pointer"
-                            onclick="openModal(this.src)"
-                        >
+                        <img src="assets/aiassistant.png" alt="AI Assistant interface" class="w-full h-auto object-cover cursor-pointer" onclick="openModal(this.src)">
                         <div class="p-7">
                             <h3 class="card-title">Reusable Conversational Patterns</h3>
                             <p class="text-text-secondary leading-relaxed mb-4">
-                                Led a cross-functional team to enhance reusable patterns for AI assistants, which is now a core part of the design system to ensure consistent UX and faster implementation throughout all products and internal tools.
-                            </p>
-                            <a href="https://www.thomsonreuters.com/en/cocounsel" target="_blank" rel="noopener noreferrer" class="text-[var(--link-color)] font-medium text-sm hover:underline tracking-wide">
-                                Learn More &rarr;
-                            </a>
-                            <div class="flex flex-wrap mt-4">
-                                <span class="tag-chip">UI Components</span>
-                                <span class="tag-chip">Team Leadership</span>
-                                <span class="tag-chip">Design Systems</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="animate-on-scroll">
-                <h2 class="section-title">
-                    Organizational AI Patterns
-                </h2>
-                <div class="space-y-5">
-                    <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
+          _av-card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
                         <h3 class="card-title">AI-Driven Compliance Alert Framework</h3>
                         <p class="card-description">Conducted a systematical analysis of designs used accross the organization for compliance alerts and notifications. Designed an AI-driven compliance alert framework with interconnected solutions, including intelligent alerts, automated alert monitoring, and guided action workflows.</p>
                         <div class="flex flex-wrap mt-4">
@@ -252,13 +227,8 @@
                     AI-Driven Product Features
                 </h2>
                 <div class="space-y-5">
-                     <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl overflow-hidden">
-                        <img 
-                            src="assets/audit.jpeg" 
-                            alt="Audit Intelligence Analyze dashboard" 
-                            class="w-full h-auto object-cover cursor-pointer"
-                            onclick="openModal(this.src)"
-                        >
+                    <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl overflow-hidden">
+                        <img src="assets/audit.jpeg" alt="Audit Intelligence Analyze dashboard" class="w-full h-auto object-cover cursor-pointer" onclick="openModal(this.src)">
                         <div class="p-7">
                             <h3 class="card-title">Audit Intelligence Analyze</h3>
                             <p class="text-text-secondary leading-relaxed mb-4">
@@ -281,7 +251,17 @@
                             <span class="tag-chip">Human-AI Collaboration</span>
                             <span class="tag-chip">Augmented Intelligence</span>
                             <span class="tag-chip">Trust and productivity</span>
-      _av-card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="animate-on-scroll">
+                <h2 class="section-title">
+                    Proof of Concept (POC) with AI
+                </h2>
+                <div class="space-y-5">
+                    <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
                         <h3 class="card-title">UX for Legal, Tax & Accounting AI</h3>
                         <p class="card-description">Led UX design for new AI-powered features across legal, tax, and accounting POCs, creating intuitive interfaces that translated complex AI outputs into user-centered experiences.</p>
                         <div class="flex flex-wrap mt-4">
