@@ -1,332 +1,431 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Murat Usta - AI Experience Designer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-primary: #0f172a; /* Slate 900 - deeper for better hierarchy */
-            --text-secondary: #475569; /* Slate 600 */
-            --text-tertiary: #64748b; /* Slate 500 */
-            --border-color: #e2e8f0; /* Slate 200 */
-            --card-bg-color: #f8fafc; /* Slate 50 */
-            --link-color: #0c4a6e; /* Cyan 800 */
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Murat Usta - AI Experience Designer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-primary: #0f172a; /* Slate 900 - deeper for better hierarchy */
+            --text-secondary: #475569; /* Slate 600 */
+            --text-tertiary: #64748b; /* Slate 500 */
+            --border-color: #e2e8f0; /* Slate 200 */
+            --card-bg-color: #f8fafc; /* Slate 50 */
+            --link-color: #0c4a6e; /* Cyan 800 */
+        }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html {
+            scroll-behavior: smooth;
+        }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-            line-height: 1.6;
-        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+            line-height: 1.6;
+        }
 
-        h1 {
-            font-weight: 800;
-            letter-spacing: -0.025em;
-            line-height: 1.1;
-        }
+        h1 {
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.1;
+        }
 
-        h2 {
-            font-weight: 700;
-            letter-spacing: -0.015em;
-            line-height: 1.2;
-        }
+        h2 {
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            line-height: 1.2;
+        }
 
-        h3 {
-            font-weight: 600;
-            letter-spacing: -0.005em;
-            line-height: 1.3;
-        }
+        h3 {
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            line-height: 1.3;
+        }
 
-        /* Simple Scroll Animation */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
+        /* Simple Scroll Animation */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
 
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-        .section-title {
-            color: var(--text-primary);
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--border-color);
-        }
+        .section-title {
+            color: var(--text-primary);
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+        }
 
-        .card-title {
-            font-size: 1.125rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-primary);
-            font-weight: 700;
-            letter-spacing: -0.01em;
-        }
+        .card-title {
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
 
-        .card-description {
-            color: var(--text-secondary);
-            line-height: 1.65;
-            font-size: 0.9375rem;
-        }
+        .card-description {
+            color: var(--text-secondary);
+            line-height: 1.65;
+            font-size: 0.9375rem;
+        }
 
-        .tag-chip {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.375rem 0.75rem;
-            background-color: #f1f5f9;
-            color: var(--text-primary);
-            font-size: 0.75rem;
-            font-weight: 500;
-            border-radius: 0.750rem;
-            border: 1.5px solid #435469;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
+        .tag-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.375rem 0.75rem;
+            background-color: #f1f5f9;
+            color: var(--text-primary);
+            font-size: 0.75rem;
+            font-weight: 500;
+            border-radius: 0.750rem;
+            border: 1.5px solid #435469;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
 
-        .contact-link {
-            color: var(--link-color);
-            text-decoration: none;
-            font-weight: 400;
-            transition: color 0.2s ease;
-        }
+        .contact-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.2s ease;
+        }
 
-        .contact-link:hover {
-            color: #164e63;
-            text-decoration: underline;
-        }
-        
-        /* Modal Styles */
-        .modal {
-            display: none; /* Hidden by default */
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-        .modal.show {
-            display: flex; /* Use flex for centering */
-            opacity: 1;
-        }
-        .modal-content {
-            transform: scale(0.95);
-            transition: transform 0.3s ease-in-out;
-        }
-        .modal.show .modal-content {
-            transform: scale(1);
-        }
+        .contact-link:hover {
+            color: #164e63;
+            text-decoration: underline;
+        }
 
-        @media (min-width: 768px) {
-            .section-title {
-                font-size: 2rem;
-                margin-bottom: 2rem;
-                padding-bottom: 1rem;
-            }
-            
-            .card-title {
-                font-size: 1.25rem;
-                font-weight: 700;
-                letter-spacing: -0.01em;
-            }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-            .card-description {
-                font-size: 1rem;
-            }
-        }
-    </style>
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 95%;
+            max-width: 1200px;
+            height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            transition: color 0.2s ease;
+        }
+
+        .modal-close:hover {
+            color: #cccccc;
+        }
+
+        /* Clickable image cursor */
+        .clickable-image {
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .clickable-image:hover {
+            opacity: 0.9;
+        }
+
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+                padding-bottom: 1rem;
+            }
+            
+            .card-title {
+                font-size: 1.25rem;
+                font-weight: 700;
+                letter-spacing: -0.01em;
+            }
+
+            .card-description {
+                font-size: 1rem;
+            }
+
+            .modal-content {
+                padding: 40px;
+            }
+        }
+
+        /* Prevent body scroll when modal is open */
+        body.modal-open {
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body class="antialiased">
 
-    <div class="max-w-3xl mx-auto px-6 py-20 md:py-32">
-        <header class="mb-16 md:mb-20 animate-on-scroll">
-            <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-6 md:gap-8">
-                <div>
-                    <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-text-primary mb-2">
-                        Murat Usta
-                    </h1>
-                    <p class="text-lg md:text-xl text-text-tertiary font-light">
-                        AI Experience Designer
-                    </p>
-                </div>
-                <div class="text-sm md:text-base text-text-secondary space-y-1 md:text-right">
-                    <div>
-                        <a href="mailto:murat.usta@email.com" class="contact-link">murat.usta@email.com</a>
-                    </div>
-                    <div>
-                        <a href="tel:+1234567890" class="contact-link">+1 (234) 567-8900</a>
-                    </div>
-                </div>
-            </div>
-        </header>
+    <div class="max-w-3xl mx-auto px-6 py-20 md:py-32">
+        <header class="mb-16 md:mb-20 animate-on-scroll">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-6 md:gap-8">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-text-primary mb-2">
+                        Murat Usta
+                    </h1>
+                    <p class="text-lg md:text-xl text-text-tertiary font-light">
+                        AI Experience Designer
+                    </p>
+                </div>
+                <div class="text-sm md:text-base text-text-secondary space-y-1 md:text-right">
+                    <div>
+                        <a href="mailto:murat.usta@email.com" class="contact-link">murat.usta@email.com</a>
+                    </div>
+                    <div>
+                        <a href="tel:+1234567890" class="contact-link">+1 (234) 567-8900</a>
+                    </div>
+                </div>
+            </div>
+            <!----------------------
+            <div class="border-b-2 border-[var(--text-primary)] mt-12 md:mt-16 opacity-20"></div>
+            ---->
+        </header>
 
-        <main class="space-y-20 md:space-y-24">
+        <main class="space-y-20 md:space-y-24">
 
-            <section class="animate-on-scroll">
-                <h2 class="section-title">
-                    Enterprise AI Platform
-                </h2>
-                <div class="space-y-5">
-                    <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
-                        <h3 class="card-title">AI UX Design Assistant</h3>
-                        <p class="card-description">Designed an assistant that turns text-based briefs and low-fi wireframe images into single-file HTML/CSS prototypes, accelerating development and standardizing UX quality.</p>
-                        <div class="flex flex-wrap mt-4">
-                            <span class="tag-chip">Rapid Prototyping</span>
-                            <span class="tag-chip">AI-Assisted Design</span>
-                            <span class="tag-chip">Productivity</span>
-                        </div>
-                    </div>
-                    <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
-                        <h3 class="card-title">AI UX Research Analyzer</h3>
-                        <p class="card-description">Built a tool that analyzes UX meeting transcripts to extract user flows, pain points, and design rationales, accelerating evidence-based decisions.</p>
-                        <div class="flex flex-wrap mt-4">
-                            <span class="tag-chip">User Research</span>
-                            <span class="tag-chip">AI-Assisted Analysis</span>
-                            <span class="tag-chip">Efficiency</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <section class="animate-on-scroll">
+                <h2 class="section-title">
+                    Enterprise AI Platform
+                </h2>
+                <div class="space-y-5">
+                    <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
+                        <h3 class="card-title">AI UX Design Assistant</h3>
+                        <p class="card-description">Designed an assistant that turns text-based briefs and low-fi wireframe images into single-file HTML/CSS prototypes, accelerating development and standardizing UX quality.</p>
+                        <div class="flex flex-wrap mt-4">
+                            <span class="tag-chip">Rapid Prototyping</span>
+                            <span class="tag-chip">AI-Assisted Design</span>
+                            <span class="tag-chip">Productivity</span>
+                        </div>
+                    </div>
+                    <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
+                        <h3 class="card-title">AI UX Research Analyzer</h3>
+                        <p class="card-description">Built a tool that analyzes UX meeting transcripts to extract user flows, pain points, and design rationales, accelerating evidence-based decisions.</p>
+                        <div class="flex flex-wrap mt-4">
+                            <span class="tag-chip">User Research</span>
+                            <span class="tag-chip">AI-Assisted Analysis</span>
+                            <span class="tag-chip">Efficiency</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-            <section class="animate-on-scroll">
-                <h2 class="section-title">
-                    AI Assistant Conversational Design
-                </h2>
-                <div class="space-y-5">
-                    <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl overflow-hidden">
-                        <img src="assets/aiassistant.png" alt="AI Assistant interface" class="w-full h-auto object-cover cursor-pointer" onclick="openModal(this.src)">
-                        <div class="p-7">
-                            <h3 class="card-title">Reusable Conversational Patterns</h3>
-                            <p class="text-text-secondary leading-relaxed mb-4">
-          _av-card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
-                        <h3 class="card-title">AI-Driven Compliance Alert Framework</h3>
-                        <p class="card-description">Conducted a systematical analysis of designs used accross the organization for compliance alerts and notifications. Designed an AI-driven compliance alert framework with interconnected solutions, including intelligent alerts, automated alert monitoring, and guided action workflows.</p>
-                        <div class="flex flex-wrap mt-4">
-                            <span class="tag-chip">Systems Design</span>
-                            <span class="tag-chip">Design Patterns</span>
-                            <span class="tag-chip">Design Organization</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <section class="animate-on-scroll">
+                <h2 class="section-title">
+                    AI Assistant Conversational Design
+                </h2>
+                <div class="space-y-5">
+                    <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl overflow-hidden">
+                        <img 
+                            src="assets/aiassistant.png" 
+                            alt="AI Assistant interface" 
+                            class="w-full h-auto object-cover clickable-image"
+                            onclick="openModal(this)"
+                        >
+                        <div class="p-7">
+                            <h3 class="card-title">Reusable Conversational Patterns</h3>
+                            <p class="text-text-secondary leading-relaxed mb-4">
+                                Led a cross-functional team to enhance reusable patterns for AI assistants, which is now a core part of the design system to ensure consistent UX and faster implementation throughout all products and internal tools.
+                            </p>
+                            <a href="https://www.thomsonreuters.com/en/cocounsel" target="_blank" rel="noopener noreferrer" class="text-[var(--link-color)] font-medium text-sm hover:underline tracking-wide">
+                                Learn More &rarr;
+                            </a>
+                            <div class="flex flex-wrap mt-4">
+                                <span class="tag-chip">UI Components</span>
+                                <span class="tag-chip">Team Leadership</span>
+                                <span class="tag-chip">Design Systems</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-            <section class="animate-on-scroll">
-                <h2 class="section-title">
-                    AI-Driven Product Features
-                </h2>
-                <div class="space-y-5">
-                    <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl overflow-hidden">
-                        <img src="assets/audit.jpeg" alt="Audit Intelligence Analyze dashboard" class="w-full h-auto object-cover cursor-pointer" onclick="openModal(this.src)">
-                        <div class="p-7">
-                            <h3 class="card-title">Audit Intelligence Analyze</h3>
-                            <p class="text-text-secondary leading-relaxed mb-4">
-                                Acted as the lead researcher and designer for an AI-powered tool that enhances audit quality by automating transaction analysis. This high-impact project was recognized by <span class="font-medium text-text-primary">Accounting Today</span> as a top new audit tool.
-                            </p>
-                            <a href="https://tax.thomsonreuters.com/en/accounting-solutions/c/thomson-reuters-introduces-audit-intelligence-analyze" target="_blank" rel="noopener noreferrer" class="text-[var(--link-color)] font-medium text-sm hover:underline tracking-wide">
-                                Learn More &rarr;
-                            </a>
-                            <div class="flex flex-wrap mt-4">
-                                <span class="tag-chip">Research and Design</span>
-                                <span class="tag-chip">New AI/ML Feature</span>
-                                <span class="tag-chip">Enterprise Product</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
-                        <h3 class="card-title">Human-in-the-Loop Content Operations</h3>
-                        <p class="card-description">Designed human-in-the-loop tools for AI-driven content operations. This framework for labeling, review, and workflow automation boosted analytical precision while keeping users in control.</p>
-                        <div class="flex flex-wrap mt-4">
-                            <span class="tag-chip">Human-AI Collaboration</span>
-                            <span class="tag-chip">Augmented Intelligence</span>
-                            <span class="tag-chip">Trust and productivity</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <section class="animate-on-scroll">
+                <h2 class="section-title">
+                    Organizational AI Patterns
+                </h2>
+                <div class="space-y-5">
+                    <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
+                        <h3 class="card-title">AI-Driven Compliance Alert Framework</h3>
+                        <p class="card-description">Conducted a systematical analysis of designs used accross the organization for compliance alerts and notifications. Designed an AI-driven compliance alert framework with interconnected solutions, including intelligent alerts, automated alert monitoring, and guided action workflows.</p>
+                        <div class="flex flex-wrap mt-4">
+                            <span class="tag-chip">Systems Design</span>
+                            <span class="tag-chip">Design Patterns</span>
+                            <span class="tag-chip">Design Organization</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-            <section class="animate-on-scroll">
-                <h2 class="section-title">
-                    Proof of Concept (POC) with AI
-                </h2>
-                <div class="space-y-5">
-                    <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
-                        <h3 class="card-title">UX for Legal, Tax & Accounting AI</h3>
-                        <p class="card-description">Led UX design for new AI-powered features across legal, tax, and accounting POCs, creating intuitive interfaces that translated complex AI outputs into user-centered experiences.</p>
-                        <div class="flex flex-wrap mt-4">
-                            <span class="tag-chip">POC Development</span>
-                            <span class="tag-chip">Cross-functional</span>
-                            <span class="tag-chip">AI Innovation</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <section class="animate-on-scroll">
+                <h2 class="section-title">
+                    AI-Driven Product Features
+                </h2>
+                <div class="space-y-5">
+                     <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl overflow-hidden">
+                        <img 
+                            src="assets/audit.jpeg" 
+                            alt="Audit Intelligence Analyze dashboard" 
+                            class="w-full h-auto object-cover clickable-image"
+                            onclick="openModal(this)"
+                        >
+                        <div class="p-7">
+                            <h3 class="card-title">Audit Intelligence Analyze</h3>
+                            <p class="text-text-secondary leading-relaxed mb-4">
+                                Acted as the lead researcher and designer for an AI-powered tool that enhances audit quality by automating transaction analysis. This high-impact project was recognized by <span class="font-medium text-text-primary">Accounting Today</span> as a top new audit tool.
+                            </p>
+                            <a href="https://tax.thomsonreuters.com/en/accounting-solutions/c/thomson-reuters-introduces-audit-intelligence-analyze" target="_blank" rel="noopener noreferrer" class="text-[var(--link-color)] font-medium text-sm hover:underline tracking-wide">
+                                Learn More &rarr;
+                            </a>
+                            <div class="flex flex-wrap mt-4">
+                                <span class="tag-chip">Research and Design</span>
+                                <span class="tag-chip">New AI/ML Feature</span>
+                                <span class="tag-chip">Enterprise Product</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
+                        <h3 class="card-title">Human-in-the-Loop Content Operations</h3>
+                        <p class="card-description">Designed human-in-the-loop tools for AI-driven content operations. This framework for labeling, review, and workflow automation boosted analytical precision while keeping users in control.</p>
+                        <div class="flex flex-wrap mt-4">
+                            <span class="tag-chip">Human-AI Collaboration</span>
+                            <span class="tag-chip">Augmented Intelligence</span>
+                            <span class="tag-chip">Trust and productivity</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        </main>
-    </div>
-    
-        <div id="imageModal" class="modal fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm items-center justify-center p-4">
-        <span class="absolute top-4 right-6 text-white/80 hover:text-white text-5xl font-light cursor-pointer z-[51]" onclick="closeModal()">&times;</span>
-        <img class="modal-content max-w-[95vw] max-h-[90vh] object-contain rounded-lg shadow-2xl" id="modalImage" onclick="event.stopPropagation()">
-    </div>
+            <section class="animate-on-scroll">
+                <h2 class="section-title">
+                    Proof of Concept (POC) with AI
+                </h2>
+                <div class="space-y-5">
+                     <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
+                        <h3 class="card-title">UX for Legal, Tax & Accounting AI</h3>
+                        <p class="card-description">Led UX design for new AI-powered features across legal, tax, and accounting POCs, creating intuitive interfaces that translated complex AI outputs into user-centered experiences.</p>
+                        <div class="flex flex-wrap mt-4">
+                            <span class="tag-chip">POC Development</span>
+                            <span class="tag-chip">Cross-functional</span>
+                            <span class="tag-chip">AI Innovation</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Scroll Animation Observer
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.transitionDelay = `${index * 100}ms`;
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
+        </main>
+    </div>
 
-            document.querySelectorAll('.animate-on-scroll').forEach(el => {
-                observer.observe(el);
-            });
-            
-            // --- Modal Functions ---
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
+    <!-- Modal for image viewing -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" class="modal-image" src="" alt="">
+        </div>
+    </div>
 
-            window.openModal = function(src) {
-                if (!modal || !modalImg) return;
-                modalImg.src = src;
-                modal.classList.add('show');
-                document.body.style.overflow = 'hidden';
-            }
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transitionDelay = `${index * 100}ms`;
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
 
-            window.closeModal = function() {
-                if (!modal) return;
-                modal.classList.remove('show');
-                document.body.style.overflow = 'auto';
-            }
-            
-            // Close modal on background click
-            modal.addEventListener('click', closeModal);
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+        });
 
-            // Close modal with Escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.classList.contains('show')) {
-                    closeModal();
-                }
-            });
-        });
-    </script>
+        // Modal functionality
+        function openModal(imgElement) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            
+            modalImg.src = imgElement.src;
+            modalImg.alt = imgElement.alt;
+            modal.style.display = 'flex';
+            document.body.classList.add('modal-open');
+            
+            // Trigger animation
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('show');
+            document.body.classList.remove('modal-open');
+            
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 
 </body>
+
 </html>
