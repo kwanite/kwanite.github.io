@@ -185,33 +185,46 @@
             transform: scale(1.1);
         }
 
-            /* ADD THIS CSS */
-            .modal-arrow {
+            /* Navigation arrows */
+            .modal-nav {
                 position: absolute;
                 top: 50%;
                 transform: translateY(-50%);
-                font-size: 2.5rem;
-                color: rgba(255, 255, 255, 0.7);
+                background: rgba(0, 0, 0, 0.7);
+                color: white;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 cursor: pointer;
-                z-index: 1002;
-                padding: 0 1.5rem;
+                font-size: 20px;
+                font-weight: bold;
+                z-index: 1001;
+                transition: all 0.2s ease;
                 user-select: none;
-                transition: color 0.2s ease, background-color 0.2s ease;
-                border-radius: 8px;
-                line-height: 1;
             }
 
-            .modal-arrow:hover {
-                color: white;
-                background-color: rgba(0, 0, 0, 0.3);
+            .modal-nav:hover {
+                background: rgba(0, 0, 0, 0.9);
+                border-color: rgba(255, 255, 255, 0.6);
+                transform: translateY(-50%) scale(1.1);
             }
 
             .modal-prev {
-                left: 15px;
+                left: 30px;
             }
 
             .modal-next {
-                right: 15px;
+                right: 30px;
+            }
+
+            .modal-nav.disabled {
+                opacity: 0.3;
+                cursor: not-allowed;
+                pointer-events: none;
             }
 
         /* Clickable image cursor */
@@ -539,102 +552,144 @@
     <div id="imageModal" class="modal" onclick="closeModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="modal-close" onclick="closeModal()">&times;</span>
-            <span class="modal-arrow modal-prev" onclick="changeImage(-1, event)">&#10094;</span>
-            <span class="modal-arrow modal-next" onclick="changeImage(1, event)">&#10095;</span>
-            <img id="modalImage" class="modal-image" src="" alt="">
+                <div class="modal-prev modal-nav" onclick="previousImage()">‹</div>
+                <div class="modal-next modal-nav" onclick="nextImage()">›</div>
+                <img id="modalImage" class="modal-image" src="" alt="">
         </div>
     </div>
 
     <script>
-    let allGalleryImages = [];
-    let currentImageIndex = 0;
-    const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-
-    document.addEventListener('DOMContentLoaded', () => {
-        // --- Animate on scroll ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    entry.target.style.transitionDelay = `${index * 100}ms`;
-                    entry.target.classList.add('visible');
-                }
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transitionDelay = `${index * 100}ms`;
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
             });
-        }, {
-            threshold: 0.1
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
         });
 
-        document.querySelectorAll('.animate-on-scroll').forEach(el => {
-            observer.observe(el);
-        });
 
-        // --- Collect all clickable images for the gallery ---
-        allGalleryImages = Array.from(document.querySelectorAll('.clickable-image'));
-    });
+        // Modal functionality with navigation
+        let currentImageIndex = 0;
+        let modalImages = [];
 
-    // --- Modal Functionality ---
-    function updateModalImage() {
-        if (currentImageIndex < 0 || currentImageIndex >= allGalleryImages.length) return;
-
-        const imgElement = allGalleryImages[currentImageIndex];
-        const imgSrc = imgElement.dataset.fullSrc || imgElement.src;
-        
-        modalImg.src = imgSrc;
-        modalImg.alt = imgElement.alt;
-
-        modalImg.onload = function() {
-            if (this.naturalHeight > window.innerHeight * 0.9) {
-                this.style.maxHeight = '90vh';
-                this.style.overflowY = 'auto';
-            } else {
-                 this.style.maxHeight = '90vh';
-                 this.style.overflowY = 'hidden';
-            }
-        };
-    }
-
-    function openModal(imgElement) {
-        currentImageIndex = allGalleryImages.findIndex(img => img === imgElement);
-        if (currentImageIndex === -1) return; // Image not in gallery
-
-        updateModalImage();
-        
-        modal.style.display = 'flex';
-        document.body.classList.add('modal-open');
-        
-        setTimeout(() => {
-            modal.classList.add('show');
-        }, 10);
-    }
-
-    function changeImage(direction, event) {
-        if (event) event.stopPropagation();
-        currentImageIndex = (currentImageIndex + direction + allGalleryImages.length) % allGalleryImages.length;
-        updateModalImage();
-    }
-
-    function closeModal() {
-        modal.classList.remove('show');
-        document.body.classList.remove('modal-open');
-        
-        setTimeout(() => {
-            modal.style.display = 'none';
-        }, 300);
-    }
-
-    // --- Event Listeners for Keyboard Navigation ---
-    document.addEventListener('keydown', function(event) {
-        const isModalOpen = modal.style.display === 'flex';
-        if (!isModalOpen) return;
-
-        if (event.key === 'Escape') {
-            closeModal();
-        } else if (event.key === 'ArrowRight') {
-            changeImage(1);
-        } else if (event.key === 'ArrowLeft') {
-            changeImage(-1);
+        function openModal(imgElement) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            
+            // Collect all clickable images
+            modalImages = Array.from(document.querySelectorAll('.clickable-image')).map(img => ({
+                src: img.dataset.fullSrc || img.src,
+                alt: img.alt
+            }));
+            
+            // Find index of clicked image
+            const clickedSrc = imgElement.dataset.fullSrc || imgElement.src;
+            currentImageIndex = modalImages.findIndex(img => img.src === clickedSrc);
+            if (currentImageIndex === -1) currentImageIndex = 0;
+            
+            // Display the image
+            displayModalImage();
+            
+            modal.style.display = 'flex';
+            document.body.classList.add('modal-open');
+            
+            // Trigger animation
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
         }
-    });
+
+        function displayModalImage() {
+            const modalImg = document.getElementById('modalImage');
+            const prevBtn = document.querySelector('.modal-prev');
+            const nextBtn = document.querySelector('.modal-next');
+            
+            if (modalImages.length === 0) return;
+            
+            const currentImage = modalImages[currentImageIndex];
+            modalImg.src = currentImage.src;
+            modalImg.alt = currentImage.alt;
+            
+            // Update navigation button states
+            prevBtn.classList.toggle('disabled', currentImageIndex === 0);
+            nextBtn.classList.toggle('disabled', currentImageIndex === modalImages.length - 1);
+            
+            // Check if image is tall and add scroll if needed
+            modalImg.onload = function() {
+                if (this.naturalHeight > window.innerHeight * 0.9) {
+                    this.style.maxHeight = '90vh';
+                    this.style.overflowY = 'auto';
+                }
+            };
+        }
+
+        function previousImage() {
+            if (currentImageIndex > 0) {
+                currentImageIndex--;
+                displayModalImage();
+            }
+        }
+
+        function nextImage() {
+            if (currentImageIndex < modalImages.length - 1) {
+                currentImageIndex++;
+                displayModalImage();
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('show');
+            document.body.classList.remove('modal-open');
+            
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Close modal with Escape key, navigate with arrow keys
+        document.addEventListener('keydown', function(event) {
+            const modal = document.getElementById('imageModal');
+            if (modal.classList.contains('show')) {
+                switch(event.key) {
+                    case 'Escape':
+                        closeModal();
+                        break;
+                    case 'ArrowLeft':
+                        previousImage();
+                        break;
+                    case 'ArrowRight':
+                        nextImage();
+                        break;
+                }
+            }
+        });
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('show');
+            document.body.classList.remove('modal-open');
+            
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
     </script>
 
 </body>
