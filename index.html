@@ -99,16 +99,25 @@
             margin-bottom: 0.5rem;
         }
 
-        .contact-link {
-            color: var(--link-color);
-            text-decoration: none;
-            font-weight: 400;
-            transition: color 0.2s ease;
+        .design-tool-chip {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            border-radius: 1rem;
+            border: 2px solid #1e40af;
+            margin-right: 0.75rem;
+            margin-bottom: 0.75rem;
+            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+            transition: all 0.2s ease;
         }
 
-        .contact-link:hover {
-            color: #164e63;
-            text-decoration: underline;
+        .design-tool-chip:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
         }
 
         /* Modal styles */
@@ -430,6 +439,10 @@
                     <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
                         <h3 class="card-title">Guided Performance & Growth System</h3>
                         <p class="card-description">Designed an intuitive employee performance enhancement platform with tailored dashboards for individuals and managers. The UI streamlines the review cycle using guided quarterly meetings, clear timelines, and transparent progress tracking to foster continuous feedback and support professional growth for entire teams.</p>
+                        <!-- Design Tool Section -->
+                        <div class="flex flex-wrap mt-5 mb-4">
+                            <span class="design-tool-chip">Design tool: Figma</span>
+                        </div>
                         <!-- Thumbnails -->
                         <div class="flex flex-wrap gap-4 mt-6">
                             <div class="relative w-32 h-48 overflow-hidden rounded-lg border border-[var(--border-color)] cursor-pointer clickable-image" onclick="openModal(this)">
@@ -464,10 +477,9 @@
                     <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
                         <h3 class="card-title">Mobile Loyalty Application</h3>
                         <p class="card-description">Designed a complete loyalty application using the dessino.ai prototyping platform. The project involved creating a seamless, QR-code-based system for small businesses to reward repeat customers, covering the end-to-end experience from merchant setup to the end-user interface.</p>
-                        <div class="mt-4 mb-4">
-                            <a href="https://dessino.ai/shared/0b795a26-5ef6-4958-b9a2-d4d47b9aeb7d" target="_blank" rel="noopener noreferrer" class="text-[var(--link-color)] font-medium text-sm hover:underline tracking-wide">
-                                View Designs &rarr;
-                            </a>
+                        <!-- Design Tool Section -->
+                        <div class="flex flex-wrap mt-5 mb-4">
+                            <span class="design-tool-chip">Design tool: Dessino.ai</span>
                         </div>
                         <!-- Thumbnails -->
                         <div class="flex flex-wrap gap-4 mt-6">
@@ -503,13 +515,10 @@
                     <div class="bg-[var(--card-bg-color)] border border-[var(--border-color)] rounded-xl p-7">
                         <h3 class="card-title">Equine Sales Platform</h3>
                         <p class="card-description">Designed in dessino.ai and developed a full-stack website for a horse stable using React and Firestore. The application features a searchable sales gallery and an admin dashboard for the owner to manage horse profiles, streamlining the entire sales and showcasing process.</p>
-                        <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-4 mb-4">
-                            <a href="https://dessino.ai/shared/024290a5-d452-4745-bda7-0e6f6bda2f56" target="_blank" rel="noopener noreferrer" class="text-[var(--link-color)] font-medium text-sm hover:underline tracking-wide">
-                                View Designs &rarr;
-                            </a>
-                            <a href="https://ankastables.com" target="_blank" rel="noopener noreferrer" class="text-[var(--link-color)] font-medium text-sm hover:underline tracking-wide">
-                                Visit Live Site &rarr;
-                            </a>
+                        <!-- Design Tool and Tech Stack Sections -->
+                        <div class="flex flex-wrap mt-5 mb-4">
+                            <span class="design-tool-chip">Design tool: Dessino.ai</span>
+                            <span class="design-tool-chip">Tech stack: React, Firebase</span>
                         </div>
                         <!-- Thumbnails -->
                         <div class="flex flex-wrap gap-4 mt-6">
