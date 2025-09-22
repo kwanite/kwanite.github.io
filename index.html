@@ -585,15 +585,18 @@
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImage');
             
-            // Collect all clickable images
-            modalImages = Array.from(document.querySelectorAll('.clickable-image')).map(img => ({
-                src: img.dataset.fullSrc || img.src,
-                alt: img.alt
-            }));
+            // Collect all clickable images with their actual sources
+            modalImages = [];
+            document.querySelectorAll('.clickable-image').forEach(img => {
+                modalImages.push({
+                    src: img.dataset.fullSrc || img.src,
+                    alt: img.alt,
+                    element: img
+                });
+            });
             
-            // Find index of clicked image
-            const clickedSrc = imgElement.dataset.fullSrc || imgElement.src;
-            currentImageIndex = modalImages.findIndex(img => img.src === clickedSrc);
+            // Find index of clicked image by comparing the actual element
+            currentImageIndex = modalImages.findIndex(item => item.element === imgElement);
             if (currentImageIndex === -1) currentImageIndex = 0;
             
             // Display the image
@@ -671,23 +674,6 @@
                         nextImage();
                         break;
                 }
-            }
-        });
-
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            modal.classList.remove('show');
-            document.body.classList.remove('modal-open');
-            
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-        }
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
             }
         });
     </script>
